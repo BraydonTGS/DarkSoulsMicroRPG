@@ -8,7 +8,7 @@ namespace DarkSoulsMicroRPG.Characters
     {
 
         public int CharacterId { get; set; }
-        public string CharacterArt { get; set; }
+        public string CharacterArt { get; set; } = ArtAssets.Mage;
         public ConsoleColor Color { get; set; } = ConsoleColor.Blue;
 
         public string Name { get; set; }

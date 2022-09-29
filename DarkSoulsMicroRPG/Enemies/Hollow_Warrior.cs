@@ -8,10 +8,10 @@ namespace DarkSoulsMicroRPG.Enemies
     {
 
         public int CharacterId { get; set; }
-        public string CharacterArt { get; set; }
+        public string CharacterArt { get; set; } = ArtAssets.HollowWarrior;
         public ConsoleColor Color { get; set; } = ConsoleColor.DarkCyan;
 
-        public string Name { get; set; }
+        public string Name { get; set; } = "Hollow Warrior";
         public int Level { get; set; } = 5;
 
         public int MaxHealth { get; set; } = 15;

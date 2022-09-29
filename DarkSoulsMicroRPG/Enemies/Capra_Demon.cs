@@ -8,10 +8,10 @@ namespace DarkSoulsMicroRPG.Enemies
     {
 
         public int CharacterId { get; set; }
-        public string CharacterArt { get; set; }
+        public string CharacterArt { get; set; } = ArtAssets.CapraDemon;
         public ConsoleColor Color { get; set; } = ConsoleColor.DarkYellow;
 
-        public string Name { get; set; }
+        public string Name { get; set; } = "Capra Demon";
         public int Level { get; set; } = 10;
 
         public int MaxHealth { get; set; } = 20;
