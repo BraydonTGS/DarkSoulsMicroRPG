@@ -9,6 +9,8 @@ namespace DarkSoulsMicroRPG.Interfaces
 
         public ConsoleColor Color { get; set; }
 
+        public string Type { get; set; }
+
         public string Name { get; set; }
 
         public int Level { get; set; }
@@ -16,8 +18,6 @@ namespace DarkSoulsMicroRPG.Interfaces
         public int MaxHealth { get; set; }
 
         public int Health { get; set; }
-
-        public void DisplayInfo();
     }
 }
 

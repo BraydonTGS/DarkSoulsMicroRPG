@@ -1,5 +1,6 @@
 ﻿using System;
 using DarkSoulsMicroRPG.Factory;
+using DarkSoulsMicroRPG.Interfaces;
 using DarkSoulsMicroRPG.Printing;
 using static System.Console;
 namespace DarkSoulsMicroRPG.World
@@ -30,11 +31,14 @@ namespace DarkSoulsMicroRPG.World
             Write("\n> Please Enter a Name: ");
             string userName = ReadLine().Trim();
             var userCharacter = CharacterFactory.GetCharacter(selectedIndex, userName);
-            PrintingText.Loading();
+            ShowCharacterInfo(userCharacter);
+        }
+
+        public void ShowCharacterInfo(ICharacter character)
+        {
             Clear();
-            userCharacter.DisplayInfo();
+            PrintingText.DisplayCharacterInfo(character);
             ReadKey();
-            WriteLine();
         }
 
         public void ExitGame()

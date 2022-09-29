@@ -11,6 +11,7 @@ namespace DarkSoulsMicroRPG.Enemies
         public int CharacterId { get; set; }
         public string CharacterArt { get; set; } = ArtAssets.CapraDemon;
         public ConsoleColor Color { get; set; } = ConsoleColor.DarkYellow;
+        public string Type { get; set; } = "Demon";
 
         public string Name { get; set; } = "Capra Demon";
         public int Level { get; set; } = 10;
@@ -26,17 +27,6 @@ namespace DarkSoulsMicroRPG.Enemies
             Health = MaxHealth;
         }
 
-        // Display Character Info //
-        public void DisplayInfo()
-        {
-            WriteLine();
-            ForegroundColor = Color;
-            WriteLine($"--- {Name} ---");
-            WriteLine($"\n{CharacterArt}\n");
-            WriteLine($"Health: {Health}");
-            WriteLine("----------------");
-            ResetColor();
-        }
     }
 }
 

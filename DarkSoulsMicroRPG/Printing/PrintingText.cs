@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Drawing;
+using System.Xml.Linq;
+using DarkSoulsMicroRPG.Interfaces;
 using static System.Console;
 namespace DarkSoulsMicroRPG.Printing
 {
@@ -23,7 +26,7 @@ namespace DarkSoulsMicroRPG.Printing
  ░                                                                                  ");
             ForegroundColor = previousColor;
         }
-
+        // You Died //
         public static void PrintYouDied()
         {
             Clear();
@@ -42,6 +45,20 @@ namespace DarkSoulsMicroRPG.Printing
  ░ ░                           ░                  ░      ");
 
             ForegroundColor = previousColor;
+        }
+
+        // Display Character Info //
+
+        public static void DisplayCharacterInfo(ICharacter character)
+        {
+            WriteLine();
+            ForegroundColor = character.Color;
+            WriteLine($"----------> {character.Type} <----------");
+            WriteLine($"Name: {character.Name}");
+            WriteLine($"\n{character.CharacterArt}\n");
+            WriteLine($"{character.Name}'s Health: ({character.Health}/{character.MaxHealth})");
+            WriteLine("-------------------------------->");
+            ResetColor();
         }
 
         // Loading //

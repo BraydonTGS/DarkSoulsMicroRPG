@@ -11,6 +11,7 @@ namespace DarkSoulsMicroRPG.Characters
         public int CharacterId { get; set; }
         public string CharacterArt { get; set; } = ArtAssets.Thief;
         public ConsoleColor Color { get; set; } = ConsoleColor.Yellow;
+        public string Type { get; set; } = "Thief";
 
         public string Name { get; set; }
         public int Level { get; set; } = 1;
@@ -27,17 +28,6 @@ namespace DarkSoulsMicroRPG.Characters
             Health = MaxHealth;
         }
 
-        // Display Character Info //
-        public void DisplayInfo()
-        {
-            WriteLine();
-            ForegroundColor = Color;
-            WriteLine($"--- {Name} ---");
-            WriteLine($"\n{CharacterArt}\n");
-            WriteLine($"Health: {Health}");
-            WriteLine("----------------");
-            ResetColor();
-        }
     }
 }
 

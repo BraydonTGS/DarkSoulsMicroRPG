@@ -11,6 +11,7 @@ namespace DarkSoulsMicroRPG.Characters
         public int CharacterId { get; set; }
         public string CharacterArt { get; set; } = ArtAssets.Mage;
         public ConsoleColor Color { get; set; } = ConsoleColor.Blue;
+        public string Type { get; set; } = "Mage";
 
         public string Name { get; set; }
         public int Level { get; set; } = 1;
@@ -25,18 +26,6 @@ namespace DarkSoulsMicroRPG.Characters
 
             Name = name;
             Health = MaxHealth;
-        }
-
-        // Display Character Info //
-        public void DisplayInfo()
-        {
-            WriteLine();
-            ForegroundColor = Color;
-            WriteLine($"--- {Name} ---");
-            WriteLine($"\n{CharacterArt}\n");
-            WriteLine($"Health: {Health}");
-            WriteLine("----------------");
-            ResetColor();
         }
     }
 }

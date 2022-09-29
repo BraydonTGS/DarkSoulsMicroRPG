@@ -11,6 +11,7 @@ namespace DarkSoulsMicroRPG.Enemies
         public int CharacterId { get; set; }
         public string CharacterArt { get; set; } = ArtAssets.HollowWarrior;
         public ConsoleColor Color { get; set; } = ConsoleColor.DarkCyan;
+        public string Type { get; set; } = "Warrior";
 
         public string Name { get; set; } = "Hollow Warrior";
         public int Level { get; set; } = 5;
@@ -24,18 +25,6 @@ namespace DarkSoulsMicroRPG.Enemies
             CharacterId = randomId.Next(1, 1000);
 
             Health = MaxHealth;
-        }
-
-        // Display Character Info //
-        public void DisplayInfo()
-        {
-            WriteLine();
-            ForegroundColor = Color;
-            WriteLine($"--- {Name} ---");
-            WriteLine($"\n{CharacterArt}\n");
-            WriteLine($"Health: {Health}");
-            WriteLine("----------------");
-            ResetColor();
         }
     }
 }

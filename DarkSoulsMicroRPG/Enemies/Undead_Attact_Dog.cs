@@ -11,6 +11,7 @@ namespace DarkSoulsMicroRPG.Enemies
         public int CharacterId { get; set; }
         public string CharacterArt { get; set; } = ArtAssets.UndeadDog;
         public ConsoleColor Color { get; set; } = ConsoleColor.DarkBlue;
+        public string Type { get; set; } = "Beast";
 
         public string Name { get; set; } = "Undead Dog";
         public int Level { get; set; } = 1;
@@ -25,18 +26,6 @@ namespace DarkSoulsMicroRPG.Enemies
 
             Health = MaxHealth;
 
-        }
-
-        // Display Character Info //
-        public void DisplayInfo()
-        {
-            WriteLine();
-            ForegroundColor = Color;
-            WriteLine($"--- {Name} ---");
-            WriteLine($"\n{CharacterArt}\n");
-            WriteLine($"Health: {Health}");
-            WriteLine("----------------");
-            ResetColor();
         }
     }
 }
