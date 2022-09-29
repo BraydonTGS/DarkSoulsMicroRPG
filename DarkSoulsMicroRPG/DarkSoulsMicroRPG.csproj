@@ -7,4 +7,20 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <None Remove="Characters\" />
+    <None Remove="Enemies\" />
+    <None Remove="World\" />
+    <None Remove="Printing\" />
+    <None Remove="Interfaces\" />
+    <None Remove="Factory\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Characters\" />
+    <Folder Include="Enemies\" />
+    <Folder Include="World\" />
+    <Folder Include="Printing\" />
+    <Folder Include="Interfaces\" />
+    <Folder Include="Factory\" />
+  </ItemGroup>
 </Project>
