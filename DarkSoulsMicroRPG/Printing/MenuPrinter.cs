@@ -18,6 +18,7 @@ namespace DarkSoulsMicroRPG.Printing
         // Rendering The Menu //
         private void DisplayOptions()
         {
+            WriteLine();
             WriteLine(Prompt);
 
             for (int i = 0; i < Options.Length; i++)
@@ -25,9 +26,10 @@ namespace DarkSoulsMicroRPG.Printing
                 string currentChoice = Options[i];
                 string prefix;
 
+
                 if (i == SelectedIndex)
                 {
-                    prefix = ">";
+                    prefix = "*";
                     ForegroundColor = ConsoleColor.Black;
                     BackgroundColor = ConsoleColor.White;
                 }
@@ -38,7 +40,7 @@ namespace DarkSoulsMicroRPG.Printing
                     BackgroundColor = ConsoleColor.Black;
                 }
 
-                WriteLine($"\n{prefix} * {currentChoice} *");
+                WriteLine($"\n{prefix} > {currentChoice} <");
 
             }
             ResetColor();
@@ -51,6 +53,7 @@ namespace DarkSoulsMicroRPG.Printing
             do
             {
                 Clear();
+                PrintingText.PrintTitle();
                 DisplayOptions();
                 ConsoleKeyInfo keyInfo = ReadKey(true);
                 keyPressed = keyInfo.Key;

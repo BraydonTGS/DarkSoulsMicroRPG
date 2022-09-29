@@ -13,6 +13,10 @@ namespace DarkSoulsMicroRPG.World
         public void Run()
         {
             Title = "Dark Souls RPG";
+            PrintingText.Loading();
+            PrintingText.PrintTitle();
+            WriteLine("\n> Press Any Key To Continue...");
+            ReadKey();
             RunCharacterSelection();
         }
 
@@ -22,13 +26,15 @@ namespace DarkSoulsMicroRPG.World
             string[] options = { "Warrior", "Mage", "Thief", "Exit" };
             MenuPrinter characterSelection = new MenuPrinter(prompt, options);
             int selectedIndex = characterSelection.Run();
-            Clear();
-            Write("> Please Enter a Name: ");
+            PrintingText.PrintTitle();
+            Write("\n> Please Enter a Name: ");
             string userName = ReadLine().Trim();
             var userCharacter = CharacterFactory.GetCharacter(selectedIndex, userName);
+            PrintingText.Loading();
+            Clear();
+            userCharacter.DisplayInfo();
+            ReadKey();
             WriteLine();
-
-
         }
 
         public void ExitGame()

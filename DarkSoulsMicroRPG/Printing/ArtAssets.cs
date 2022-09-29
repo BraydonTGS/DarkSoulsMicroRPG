@@ -48,10 +48,7 @@ namespace DarkSoulsMicroRPG.Printing
    ||                hjm";
 
 
-        public static string Thief = @"
-                                    /)
-                                   //
-                 __*_             //
+        public static string Thief = @"                __*_             
               /-(____)           //
              ////- -|\          //
           ,____o% -,_          //
@@ -206,8 +203,12 @@ namespace DarkSoulsMicroRPG.Printing
  \..)   (_..  ..  :    :  : .(   \..:..    ./__.  ./
             ^    ^      \^ ^           ^\/^     ^ JaL";
 
+        public static string Skulls = "";
+
 
     }
+
+
 
 }
 

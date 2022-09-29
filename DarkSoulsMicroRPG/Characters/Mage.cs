@@ -1,4 +1,5 @@
 ﻿using System;
+using static System.Console;
 using DarkSoulsMicroRPG.Interfaces;
 using DarkSoulsMicroRPG.Printing;
 
@@ -24,6 +25,18 @@ namespace DarkSoulsMicroRPG.Characters
 
             Name = name;
             Health = MaxHealth;
+        }
+
+        // Display Character Info //
+        public void DisplayInfo()
+        {
+            WriteLine();
+            ForegroundColor = Color;
+            WriteLine($"--- {Name} ---");
+            WriteLine($"\n{CharacterArt}\n");
+            WriteLine($"Health: {Health}");
+            WriteLine("----------------");
+            ResetColor();
         }
     }
 }
