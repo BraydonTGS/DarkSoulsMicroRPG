@@ -23,20 +23,34 @@ namespace DarkSoulsMicroRPG.World
 
         private void RunCharacterSelection()
         {
-            string prompt = "> Please Select Your Character: ";
+            // Character Selection Menu //
+            string prompt = "> Please Select Your Class: ";
             string[] options = { "Warrior", "Mage", "Thief", "Exit" };
-            MenuPrinter characterSelection = new MenuPrinter(prompt, options);
-            int selectedIndex = characterSelection.Run();
-            PrintingText.PrintTitle();
-            Write("\n> Please Enter a Name: ");
-            string userName = ReadLine().Trim();
-            var userCharacter = CharacterFactory.GetCharacter(selectedIndex, userName);
-            ShowCharacterInfo(userCharacter);
+            var characterIndex = PrintingText.PrintCustomMenu(prompt, options);
+            // Validation Menu //
+            string prompt2 = "> Are you sure you want to procede? ";
+            string[] options2 = { "Yes", "No" };
+            var yesOrNoIndex = PrintingText.PrintCustomMenu(prompt2, options2);
+
+            if (yesOrNoIndex == 0)
+            {
+                PrintingText.PrintTitle();
+                Write("\n> Please Enter a Name: ");
+                PrintingText.Loading();
+                string userName = ReadLine().Trim();
+                var userCharacter = CharacterFactory.GetCharacter(characterIndex, userName);
+                ShowCharacterInfo(userCharacter);
+            }
+            else
+            {
+                RunCharacterSelection();
+            }
         }
 
         public void ShowCharacterInfo(ICharacter character)
         {
             Clear();
+            PrintingText.PrintTitle();
             PrintingText.DisplayCharacterInfo(character);
             ReadKey();
         }

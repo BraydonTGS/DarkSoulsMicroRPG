@@ -29,7 +29,7 @@ namespace DarkSoulsMicroRPG.Printing
 
                 if (i == SelectedIndex)
                 {
-                    prefix = "*";
+                    prefix = ">";
                     ForegroundColor = ConsoleColor.Black;
                     BackgroundColor = ConsoleColor.White;
                 }
@@ -40,7 +40,7 @@ namespace DarkSoulsMicroRPG.Printing
                     BackgroundColor = ConsoleColor.Black;
                 }
 
-                WriteLine($"\n{prefix} > {currentChoice} <");
+                WriteLine($"\n{prefix} * {currentChoice} *");
 
             }
             ResetColor();

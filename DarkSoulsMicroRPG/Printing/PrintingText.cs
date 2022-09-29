@@ -61,13 +61,22 @@ namespace DarkSoulsMicroRPG.Printing
             ResetColor();
         }
 
+        // Printing a Menu //
+
+        public static int PrintCustomMenu(string prompt, string[] options)
+        {
+            MenuPrinter selection = new MenuPrinter(prompt, options);
+            int index = selection.Run();
+            return index;
+        }
+
         // Loading //
         public static void Loading()
         {
             ConsoleColor previousColor = ForegroundColor;
             ForegroundColor = ConsoleColor.Red;
             Write("\n> Loading Please Wait");
-            for (int i = 0; i < 5; i++)
+            for (int i = 0; i < 4; i++)
             {
                 Thread.Sleep(1000);
                 Write(".");
