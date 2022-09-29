@@ -18,6 +18,7 @@ namespace DarkSoulsMicroRPG.Printing
         // Rendering The Menu //
         private void DisplayOptions()
         {
+            ForegroundColor = ConsoleColor.Red;
             WriteLine();
             WriteLine(Prompt);
 
@@ -29,20 +30,19 @@ namespace DarkSoulsMicroRPG.Printing
 
                 if (i == SelectedIndex)
                 {
-                    prefix = ">";
-                    ForegroundColor = ConsoleColor.Black;
-                    BackgroundColor = ConsoleColor.White;
+                    prefix = "> ";
+
                 }
                 else
                 {
                     prefix = " ";
-                    ForegroundColor = ConsoleColor.White;
-                    BackgroundColor = ConsoleColor.Black;
+
                 }
 
                 WriteLine($"\n{prefix} * {currentChoice} *");
 
             }
+            WriteLine();
             ResetColor();
         }
 
