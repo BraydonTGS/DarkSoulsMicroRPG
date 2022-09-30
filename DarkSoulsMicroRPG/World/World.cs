@@ -11,19 +11,22 @@ namespace DarkSoulsMicroRPG.World
         public World()
         {
         }
-
+        // Start of the Program //
         public void Run()
         {
             Title = "Dark Souls RPG";
             PrintingText.DsIntro();
             PrintingText.Continue();
-            Clear();
             PrintingText.Loading();
             PrintingText.PrintTitle();
             PrintingText.Continue();
             RunCharacterSelection();
         }
 
+        // To Add Main Menu - New Game - View Lore - Exit //
+        // Create a Typing Animation Method //
+
+        // Choose Your Character //
         private void RunCharacterSelection()
         {
 
@@ -54,6 +57,7 @@ namespace DarkSoulsMicroRPG.World
             }
         }
 
+        // Display Character Info //
         public void ShowCharacterInfo(ICharacter character)
         {
             PrintingText.PrintTitle();
@@ -64,6 +68,7 @@ namespace DarkSoulsMicroRPG.World
             MainCharacterMenu(character);
         }
 
+        // Main Menu for the Character "HUB" //
         public void MainCharacterMenu(ICharacter character)
         {
             PrintingText.PrintTitle();
@@ -76,6 +81,7 @@ In the morning you decide to...";
 
         }
 
+        // Exit //
         public void ExitGame()
         {
             WriteLine("Press Any Key to Exit");

@@ -3,6 +3,8 @@ using System.Drawing;
 using System.Xml.Linq;
 using DarkSoulsMicroRPG.Interfaces;
 using static System.Console;
+using static System.Net.Mime.MediaTypeNames;
+
 namespace DarkSoulsMicroRPG.Printing
 {
     public static class PrintingText
@@ -74,9 +76,13 @@ namespace DarkSoulsMicroRPG.Printing
         {
             ConsoleColor previousColor = ForegroundColor;
             ForegroundColor = ConsoleColor.Red;
-            WriteLine("\n> Press Any Key To Continue...");
+            CursorVisible = false;
+            Write("\n> Press Any Key To Continue... ");
+            WriteLine();
             ForegroundColor = previousColor;
+            CursorVisible = false;
             ReadKey();
+            CursorVisible = true;
         }
 
         // Loading //
@@ -87,19 +93,37 @@ namespace DarkSoulsMicroRPG.Printing
             Write("\n> Loading Please Wait");
             for (int i = 0; i < 4; i++)
             {
-                Thread.Sleep(1000);
+                Thread.Sleep(750);
                 Write(".");
             }
             ForegroundColor = previousColor;
         }
 
-        // Dark Souls Intro //
+        // Dark Souls Intro Testing Print //
         public static void DsIntro()
         {
             ConsoleColor previousColor = ForegroundColor;
             ForegroundColor = ConsoleColor.Red;
-            WriteLine("Thou who art Undead, art chosen...\n\nIn thine exodus from the Undead Asylum,\n\nmaketh pilgrimage to the land of Ancient Lords...\n\nWhen thou ringeth the Bell of Awakening,\n\nthe fate of the Undead thou shalt know.");
+            string intro = "Thou who art Undead, art chosen...\n\nIn thine exodus from the Undead Asylum,\n\nmaketh pilgrimage to the land of Ancient Lords...\n\nWhen thou ringeth the Bell of Awakening,\n\nthe fate of the Undead thou shalt know.";
+            CursorVisible = false;
+            for (int i = 0; i < intro.Length; i++)
+            {
+                Write(intro[i]);
+                Thread.Sleep(75);
+
+                // Skip to the End of the String //
+                if (KeyAvailable)
+                {
+                    ConsoleKeyInfo keyInfo = ReadKey(true);
+                    if (keyInfo.Key == ConsoleKey.Enter)
+                    {
+                        Write(intro.Substring(i + 1));
+                        break;
+                    }
+                }
+            }
             WriteLine();
+            CursorVisible = true;
             ForegroundColor = previousColor;
         }
 
