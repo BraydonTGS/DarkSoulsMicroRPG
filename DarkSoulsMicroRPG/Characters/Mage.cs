@@ -45,7 +45,7 @@ namespace DarkSoulsMicroRPG.Characters
                 if (randHit <= 60)
                 {
                     WriteLine(" and it is a direct hit!!!");
-                    myEnemy.TakeDamage(6);
+                    myEnemy.TakeDamage(60);
                 }
                 else
                 {

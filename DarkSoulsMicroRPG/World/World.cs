@@ -11,21 +11,23 @@ namespace DarkSoulsMicroRPG.World
     public class World
     {
         private List<ICharacter> Characters;
+        private List<ICharacter> Enemies;
         public ICharacter MyCharacter;
         public ICharacter CurrentEnemy;
 
         public World()
         {
             Characters = new List<ICharacter>();
+            Enemies = new List<ICharacter>();
         }
         // Start of the Program //
         public void Run()
         {
             Title = "Dark Souls RPG";
-            PrintingText.DsIntro();
-            PrintingText.Continue();
-            PrintingText.Loading();
-            PrintingText.PrintTitle();
+            //PrintingText.DsIntro();
+            //PrintingText.Continue();
+            //PrintingText.Loading();
+            //PrintingText.PrintTitle();
             NewGameMenu();
         }
 
@@ -139,18 +141,20 @@ In the morning you...";
         {
             PrintingText.Loading();
             PrintingText.PrintTitle();
+
+
             if (CurrentEnemy is IFightable enemy)
             {
                 if (enemy.IsDead)
                 {
-                    string prompt = $"You have already defeated {CurrentEnemy.Name}";
+                    string prompt = $"\nYou have already defeated {CurrentEnemy.Name}";
                     PrintingText.PrintMePlease(prompt);
                     PrintingText.Continue();
                     MainCharacterMenu();
                 }
             }
             ICharacter capraDemon = new Capra_Demon();
-            Characters.Add(capraDemon);
+            Enemies.Add(capraDemon);
             CurrentEnemy = capraDemon;
             PrintingText.UndeadBurg(MyCharacter);
             ReadKey();
@@ -273,7 +277,7 @@ In the morning you...";
                 {
                     PrintingText.PrintTitle();
                     PrintingText.DisplayCharacterInfo(MyCharacter);
-                    string prompt = $"{CurrentEnemy.Name} is dead, rest at a bonfire to replenish your estus... ";
+                    string prompt = $"\n{CurrentEnemy.Name} is dead, rest at a bonfire to replenish your estus... ";
                     PrintingText.PrintMePlease(prompt);
                     PrintingText.Continue();
                     MainCharacterMenu();
@@ -285,14 +289,13 @@ In the morning you...";
                     PrintingText.Loading();
                     PrintingText.PrintYouDied();
                     PrintingText.Continue();
-                    ReadKey();
-                    ExitGame();
+                    StartANewGame();
+
                 }
-
-
             }
         }
 
+        // Display Character Status in Game //
         public void DisplayStatus()
         {
             PrintingText.Loading();
@@ -300,6 +303,26 @@ In the morning you...";
             PrintingText.DisplayCharacterInfo(MyCharacter);
             PrintingText.Continue();
             MainCharacterMenu();
+        }
+
+        public void StartANewGame()
+        {
+            PrintingText.Loading();
+            PrintingText.PrintTitle();
+
+            string prompt = "> Would you like to play again? ";
+            string[] options = { "Yes", "No" };
+
+            var selectedIndex = PrintingText.PrintCustomMenu(prompt, options);
+
+            if (selectedIndex == 0)
+            {
+                Run();
+            }
+            else if (selectedIndex == 1)
+            {
+                ExitGame();
+            }
         }
 
         // Exit //

@@ -63,7 +63,6 @@ namespace DarkSoulsMicroRPG.Printing
         }
 
         // Display Character Health //
-
         public static void DisplayHealth(ICharacter character)
         {
             ForegroundColor = character.Color;
