@@ -14,6 +14,7 @@
     <None Remove="Printing\" />
     <None Remove="Interfaces\" />
     <None Remove="Factory\" />
+    <None Remove="Fighting\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Characters\" />
@@ -22,5 +23,6 @@
     <Folder Include="Printing\" />
     <Folder Include="Interfaces\" />
     <Folder Include="Factory\" />
+    <Folder Include="Fighting\" />
   </ItemGroup>
 </Project>

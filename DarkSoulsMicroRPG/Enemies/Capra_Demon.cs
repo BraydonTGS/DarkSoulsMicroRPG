@@ -34,11 +34,33 @@ namespace DarkSoulsMicroRPG.Enemies
 
         public void Attack(ICharacter player)
         {
+            if (player is IFightable myPlayer)
+            {
+                ConsoleColor previousColor = ForegroundColor;
+                ForegroundColor = Color;
+                Write($"Capra Demon lunges forward and strikes at {player.Name}...");
+                int randHit = FightPercent.Next(1, 101);
+                if (randHit <= 30)
+                {
+                    WriteLine(" and it is a direct hit!!!");
+                    myPlayer.TakeDamage(5);
+                }
+                else
+                {
+                    WriteLine($" {player.Name} dodges the attack!");
 
+                }
+                ForegroundColor = previousColor;
+            }
         }
 
         public void TakeDamage(int damage)
         {
+            Health -= damage;
+            if (Health < 0)
+            {
+                Health = 0;
+            }
 
         }
 

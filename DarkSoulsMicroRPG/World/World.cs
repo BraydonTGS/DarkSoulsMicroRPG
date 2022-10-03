@@ -105,10 +105,10 @@ namespace DarkSoulsMicroRPG.World
         {
             PrintingText.PrintTitle();
             PrintingText.Loading();
-            string prompt = @"After arrving to Firelink shrine you decide to rest at the bonefire...
+            string prompt = @"After arrving to Firelink shrine you decide to spend the night...
 
-In the morning you decide to...";
-            string[] options = { " travel to the Undead Burg", "travel to the Undead Parish", "travel to Blighttown", "give up" };
+In the morning you...";
+            string[] options = { " Travel to the Undead Burg", "Travel to the Undead Parish", "Travel to Blighttown", "Rest At Bonfire", "Display Status", "Give Up" };
             var userDecision = PrintingText.PrintCustomMenu(prompt, options);
             switch (userDecision)
             {
@@ -122,6 +122,12 @@ In the morning you decide to...";
                     Blighttown();
                     break;
                 case 3:
+                    RestAtBonfire();
+                    break;
+                case 4:
+                    DisplayStatus();
+                    break;
+                case 5:
                     ExitGame();
                     break;
                 default:
@@ -133,6 +139,16 @@ In the morning you decide to...";
         {
             PrintingText.Loading();
             PrintingText.PrintTitle();
+            if (CurrentEnemy is IFightable enemy)
+            {
+                if (enemy.IsDead)
+                {
+                    string prompt = $"You have already defeated {CurrentEnemy.Name}";
+                    PrintingText.PrintMePlease(prompt);
+                    PrintingText.Continue();
+                    MainCharacterMenu();
+                }
+            }
             ICharacter capraDemon = new Capra_Demon();
             Characters.Add(capraDemon);
             CurrentEnemy = capraDemon;
@@ -141,8 +157,6 @@ In the morning you decide to...";
             PrintingText.DisplayCharacterInfo(capraDemon);
             ReadKey();
             FightPrompt();
-            MainCharacterMenu();
-
         }
 
         public void UndeadParish()
@@ -169,10 +183,23 @@ In the morning you decide to...";
             MainCharacterMenu();
         }
 
+        public void RestAtBonfire()
+        {
+            // Maybe I can add logic for how many times you can rest // 
+            PrintingText.Loading();
+            PrintingText.PrintTitle();
+            string prompt = $"\nYou rest at the Bonfire replenshing your estus...\n";
+            PrintingText.PrintMePlease(prompt);
+            MyCharacter.Health = MyCharacter.MaxHealth;
+            PrintingText.DisplayCharacterInfo(MyCharacter);
+            PrintingText.Continue();
+            MainCharacterMenu();
+        }
+
         public void FightPrompt()
         {
             string prompt = $"You are facing {CurrentEnemy.Name}. What Would You Like to do? ";
-            string[] options = { "Fight", "Run Away" };
+            string[] options = { "Attack", "Run Away" };
             var userDecision = PrintingText.PrintCustomMenu(prompt, options);
 
             if (userDecision == 0)
@@ -219,15 +246,60 @@ In the morning you decide to...";
         {
             if (MyCharacter is IFightable character && CurrentEnemy is IFightable enemy)
             {
-                // Going to put inside a while loop if player and enemy are alive //
-                PrintingText.PrintTitle();
-                PrintingText.DisplayHealth(MyCharacter);
 
-                PrintingText.DisplayHealth(CurrentEnemy);
+                while (character.IsAlive && enemy.IsAlive)
+                {
+                    PrintingText.PrintTitle();
+                    PrintingText.DisplayHealth(MyCharacter);
+                    PrintingText.DisplayHealth(CurrentEnemy);
+
+                    character.Attack(CurrentEnemy);
+                    PrintingText.Continue();
+
+                    if (character.IsDead || enemy.IsDead)
+                    {
+                        break;
+                    }
+
+                    PrintingText.PrintTitle();
+                    PrintingText.DisplayHealth(MyCharacter);
+                    PrintingText.DisplayHealth(CurrentEnemy);
+
+                    enemy.Attack(MyCharacter);
+                    PrintingText.Continue();
+                }
+
+                if (enemy.IsDead)
+                {
+                    PrintingText.PrintTitle();
+                    PrintingText.DisplayCharacterInfo(MyCharacter);
+                    string prompt = $"{CurrentEnemy.Name} is dead, rest at a bonfire to replenish your estus... ";
+                    PrintingText.PrintMePlease(prompt);
+                    PrintingText.Continue();
+                    MainCharacterMenu();
+                }
+
+                if (character.IsDead)
+                {
+                    PrintingText.PrintTitle();
+                    PrintingText.Loading();
+                    PrintingText.PrintYouDied();
+                    PrintingText.Continue();
+                    ReadKey();
+                    ExitGame();
+                }
+
 
             }
+        }
 
-            ReadKey();
+        public void DisplayStatus()
+        {
+            PrintingText.Loading();
+            PrintingText.PrintTitle();
+            PrintingText.DisplayCharacterInfo(MyCharacter);
+            PrintingText.Continue();
+            MainCharacterMenu();
         }
 
         // Exit //

@@ -36,11 +36,30 @@ namespace DarkSoulsMicroRPG.Characters
 
         public void Attack(ICharacter enemy)
         {
+            if (enemy is IFightable myEnemy)
+            {
+                ConsoleColor previousColor = ForegroundColor;
+                ForegroundColor = Color;
+                Write("You summon your power and cast a glinstone arrow...");
+                int randHit = FightPercent.Next(1, 101);
+                if (randHit <= 60)
+                {
+                    WriteLine(" and it is a direct hit!!!");
+                    myEnemy.TakeDamage(6);
+                }
+                else
+                {
+                    WriteLine($" {enemy.Name} dodges the attack!");
+
+                }
+                ForegroundColor = previousColor;
+            }
 
         }
 
         public void Fight(ICharacter enemy)
         {
+
 
         }
 
