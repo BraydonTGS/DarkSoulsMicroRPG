@@ -141,9 +141,8 @@ In the morning you...";
         {
             PrintingText.Loading();
             PrintingText.PrintTitle();
-
-
-            if (CurrentEnemy is IFightable enemy)
+            var burgEnemy = Enemies.FirstOrDefault(enm => enm.Name == "Capra Demon");
+            if (burgEnemy is IFightable enemy)
             {
                 if (enemy.IsDead)
                 {
@@ -167,24 +166,50 @@ In the morning you...";
         {
             PrintingText.Loading();
             PrintingText.PrintTitle();
+            var parishEnemy = Enemies.FirstOrDefault(enm => enm.Name == "Hollow Warrior");
+            if (parishEnemy is IFightable enemy)
+            {
+                if (enemy.IsDead)
+                {
+                    string prompt = $"\nYou have already defeated {CurrentEnemy.Name}";
+                    PrintingText.PrintMePlease(prompt);
+                    PrintingText.Continue();
+                    MainCharacterMenu();
+                }
+            }
             ICharacter hollowWarrior = new Hollow_Warrior();
-            Characters.Add(hollowWarrior);
+            Enemies.Add(hollowWarrior);
             CurrentEnemy = hollowWarrior;
+            PrintingText.UndeadBurg(MyCharacter);
+            ReadKey();
             PrintingText.DisplayCharacterInfo(hollowWarrior);
             ReadKey();
-            MainCharacterMenu();
+            FightPrompt();
         }
 
         public void Blighttown()
         {
             PrintingText.Loading();
             PrintingText.PrintTitle();
+            var blightEnemy = Enemies.FirstOrDefault(enm => enm.Name == "Undead Dog");
+            if (blightEnemy is IFightable enemy)
+            {
+                if (enemy.IsDead)
+                {
+                    string prompt = $"\nYou have already defeated {CurrentEnemy.Name}";
+                    PrintingText.PrintMePlease(prompt);
+                    PrintingText.Continue();
+                    MainCharacterMenu();
+                }
+            }
             ICharacter undeadDog = new Undead_Attact_Dog();
-            Characters.Add(undeadDog);
+            Enemies.Add(undeadDog);
             CurrentEnemy = undeadDog;
+            PrintingText.UndeadBurg(MyCharacter);
+            ReadKey();
             PrintingText.DisplayCharacterInfo(undeadDog);
             ReadKey();
-            MainCharacterMenu();
+            FightPrompt();
         }
 
         public void RestAtBonfire()
