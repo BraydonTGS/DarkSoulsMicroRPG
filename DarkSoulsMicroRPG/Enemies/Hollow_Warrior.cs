@@ -19,6 +19,7 @@ namespace DarkSoulsMicroRPG.Enemies
         public int MaxHealth { get; set; } = 15;
         public int Health { get; set; }
 
+        public Random FightPercent { get; set; }
         public bool IsDead { get => Health <= 0; }
         public bool IsAlive { get => Health > 0; }
 
@@ -26,6 +27,7 @@ namespace DarkSoulsMicroRPG.Enemies
         {
             Random randomId = new Random();
             CharacterId = randomId.Next(1, 1000);
+            FightPercent = new Random();
 
             Health = MaxHealth;
         }

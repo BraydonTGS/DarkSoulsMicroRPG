@@ -110,7 +110,6 @@ namespace DarkSoulsMicroRPG.World
 In the morning you decide to...";
             string[] options = { " travel to the Undead Burg", "travel to the Undead Parish", "travel to Blighttown", "give up" };
             var userDecision = PrintingText.PrintCustomMenu(prompt, options);
-
             switch (userDecision)
             {
                 case 0:
@@ -138,11 +137,11 @@ In the morning you decide to...";
             Characters.Add(capraDemon);
             CurrentEnemy = capraDemon;
             PrintingText.UndeadBurg(MyCharacter);
-            PrintingText.DisplayCharacterInfo(capraDemon);
-            Fight();
             ReadKey();
+            PrintingText.DisplayCharacterInfo(capraDemon);
+            ReadKey();
+            FightPrompt();
             MainCharacterMenu();
-
 
         }
 
@@ -170,7 +169,7 @@ In the morning you decide to...";
             MainCharacterMenu();
         }
 
-        public void Fight()
+        public void FightPrompt()
         {
             string prompt = $"You are facing {CurrentEnemy.Name}. What Would You Like to do? ";
             string[] options = { "Fight", "Run Away" };
@@ -178,25 +177,66 @@ In the morning you decide to...";
 
             if (userDecision == 0)
             {
-
+                BattleGround();
             }
-            else if (userDecision == 2)
+            else if (userDecision == 1)
             {
-                WriteLine($"You try to excape, but you are no match for the {CurrentEnemy.Name}");
-                PrintingText.Loading();
-                PrintingText.PrintYouDied();
+                if (MyCharacter is IFightable main)
+                {
+                    int rnd = main.FightPercent.Next(1, 101);
+
+                    if (rnd <= 0)
+                    {
+                        PrintingText.PrintTitle();
+                        PrintingText.Loading();
+                        string input = $"\n\nYou try to excape,\n\nbut you are no match for the {CurrentEnemy.Name}";
+                        PrintingText.PrintMePlease(input);
+                        ReadKey();
+                        Clear();
+                        PrintingText.PrintYouDied();
+                        ExitGame();
+                        ReadKey();
+                    }
+
+                    else
+                    {
+                        PrintingText.PrintTitle();
+                        PrintingText.Loading();
+                        string input = $"\n\nYou dodge the incoming attacks and rush to the ladder.\n\nOn your way up the {CurrentEnemy.Name} slashes you in the back and you take 4 points of damage.\n\nYou excape with your humanity and make it back to FireLink";
+                        main.TakeDamage(4);
+                        PrintingText.PrintMePlease(input);
+                        ReadKey();
+                        MainCharacterMenu();
+                        ReadKey();
+                    }
+                }
+
             }
 
+        }
+
+        public void BattleGround()
+        {
+            if (MyCharacter is IFightable character && CurrentEnemy is IFightable enemy)
+            {
+                // Going to put inside a while loop if player and enemy are alive //
+                PrintingText.PrintTitle();
+                PrintingText.DisplayHealth(MyCharacter);
+
+                PrintingText.DisplayHealth(CurrentEnemy);
+
+            }
+
+            ReadKey();
         }
 
         // Exit //
         public void ExitGame()
         {
+            PrintingText.PrintTitle();
             PrintingText.Exit();
             ReadKey();
             PrintingText.Loading();
-            PrintingText.PrintYouDied();
-            ReadKey();
             Environment.Exit(0);
         }
     }

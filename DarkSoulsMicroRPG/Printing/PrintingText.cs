@@ -67,7 +67,7 @@ namespace DarkSoulsMicroRPG.Printing
         public static void DisplayHealth(ICharacter character)
         {
             ForegroundColor = character.Color;
-            WriteLine($"{character.Name}'s Health");
+            WriteLine($"\n{character.Name}'s Health");
             ResetColor();
             Write("[");
             BackgroundColor = character.Color;
@@ -82,6 +82,7 @@ namespace DarkSoulsMicroRPG.Printing
             }
             WriteLine($"] ({character.Health}/{character.MaxHealth})");
             ResetColor();
+            WriteLine();
         }
 
         // Printing a Custom Menu //
@@ -120,7 +121,7 @@ namespace DarkSoulsMicroRPG.Printing
         // Pringint Undead Burg Text //
         public static void UndeadBurg(ICharacter character)
         {
-            string prompt = $"\n{character.Type}: {character.Name} finally arrives at the Undead Burg.\n\nYou hear a noise behind you and swiftly turn around\n\nonly to discover...";
+            string prompt = $"\n{character.Name} finally arrives at the Undead Burg.\n\nYou hear a noise behind you and swiftly turn around\n\nonly to discover...";
             PrintMePlease(prompt);
         }
 
@@ -143,7 +144,7 @@ namespace DarkSoulsMicroRPG.Printing
         // Exit the Game //
         public static void Exit()
         {
-            string exit = "> Press Any Key To Exit...";
+            string exit = "\n> Thank you for Playing\n\n> Please Press Any Key To Exit: ";
             PrintMePlease(exit);
         }
 

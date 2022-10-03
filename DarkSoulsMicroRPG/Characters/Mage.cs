@@ -19,12 +19,14 @@ namespace DarkSoulsMicroRPG.Characters
         public int MaxHealth { get; set; } = 15;
         public int Health { get; set; }
 
+        public Random FightPercent { get; set; }
         public bool IsDead { get => Health <= 0; }
         public bool IsAlive { get => Health > 0; }
 
         public Mage(string name)
         {
             Random randomId = new Random();
+            FightPercent = new Random();
             CharacterId = randomId.Next(1, 1000);
 
             Name = name;
@@ -33,6 +35,11 @@ namespace DarkSoulsMicroRPG.Characters
 
 
         public void Attack(ICharacter enemy)
+        {
+
+        }
+
+        public void Fight(ICharacter enemy)
         {
 
         }
