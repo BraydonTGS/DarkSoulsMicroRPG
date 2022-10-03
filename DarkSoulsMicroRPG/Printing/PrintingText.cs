@@ -50,7 +50,6 @@ namespace DarkSoulsMicroRPG.Printing
         }
 
         // Display Character Info //
-
         public static void DisplayCharacterInfo(ICharacter character)
         {
             WriteLine();
@@ -110,6 +109,12 @@ namespace DarkSoulsMicroRPG.Printing
             string lore = "\nIn the Age of Ancients,\n\nThe world was unformed, shrouded by fog\n\nA land of grey crags, archtrees, and everlasting dragons\n\nBut then there was Fire\n\nAnd with Fire came Disparity. Heat and cold, life and death, and of course... Light and Dark.\n\nThen, from the Dark, They came\n\nAnd found the Souls of Lords within the flame.\n\nNito, the first of the dead\n\nThe Witch of Izalith, and her daughters of chaos\n\nGwyn, the Lord of Sunlight, and his faithful knights\n\nAnd the furtive pygmy, so easily forgotten\n\nWith the Strength of Lords, they challenged the dragons.\n\nGwyn's mighty bolts peeled apart their stone scales\n\nThe witches weaved great firestorms\n\nNito unleashed a miasma of death and disease\n\nAnd Seath the Scaleless betrayed his own, and the dragons were no more\n\nThus began the Age of Fire\n\nBut soon, the flames will fade, and only Dark will remain\n\nEven now, there are only embers, and man sees not light, but only endless nights\n\nAnd amongst the living are seen, carriers of the accursed Darksign.\n\n-Prologue, Dark Souls";
 
             PrintMePlease(lore);
+        }
+
+        public static void Exit()
+        {
+            string exit = "> Press Any Key To Exit...";
+            PrintMePlease(exit);
         }
 
         // Method for Printing one character at at time //

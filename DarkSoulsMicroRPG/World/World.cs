@@ -1,4 +1,5 @@
 ﻿using System;
+using DarkSoulsMicroRPG.Enemies;
 using DarkSoulsMicroRPG.Factory;
 using DarkSoulsMicroRPG.Interfaces;
 using DarkSoulsMicroRPG.Printing;
@@ -7,9 +8,12 @@ namespace DarkSoulsMicroRPG.World
 {
     public class World
     {
+        private List<ICharacter> Characters;
+        public ICharacter MyCharacter;
 
         public World()
         {
+            Characters = new List<ICharacter>();
         }
         // Start of the Program //
         public void Run()
@@ -72,7 +76,9 @@ namespace DarkSoulsMicroRPG.World
                 Write("\n> Please Enter a Name: ");
                 string userName = ReadLine().Trim();
                 var userCharacter = CharacterFactory.GetCharacter(characterIndex, userName);
-                ShowCharacterInfo(userCharacter);
+                Characters.Add(userCharacter);
+                MyCharacter = userCharacter;
+                ShowCharacterInfo();
             }
             else
             {
@@ -81,35 +87,91 @@ namespace DarkSoulsMicroRPG.World
         }
 
         // Display Character Info //
-        public void ShowCharacterInfo(ICharacter character)
+        public void ShowCharacterInfo()
         {
             PrintingText.PrintTitle();
             PrintingText.Loading();
             PrintingText.PrintTitle();
-            PrintingText.DisplayCharacterInfo(character);
+            PrintingText.DisplayCharacterInfo(MyCharacter);
             PrintingText.Continue();
-            MainCharacterMenu(character);
+            MainCharacterMenu();
         }
 
         // Main Menu for the Character "HUB" //
-        public void MainCharacterMenu(ICharacter character)
+        public void MainCharacterMenu()
         {
             PrintingText.PrintTitle();
             PrintingText.Loading();
             string prompt = @"After arrving to Firelink shrine you decide to rest at the bonefire...
 
 In the morning you decide to...";
-            string[] options = { " travel to the Undead Burg", "travel to the Undead Parish", "travel to Blighttown" };
+            string[] options = { " travel to the Undead Burg", "travel to the Undead Parish", "travel to Blighttown", "give up" };
             var userDecision = PrintingText.PrintCustomMenu(prompt, options);
 
+            switch (userDecision)
+            {
+                case 0:
+                    UndeadBurg();
+                    break;
+                case 1:
+                    UndeadParish();
+                    break;
+                case 2:
+                    Blighttown();
+                    break;
+                case 3:
+                    ExitGame();
+                    break;
+                default:
+                    break;
+            }
+
+
+        }
+
+        public void UndeadBurg()
+        {
+            PrintingText.Loading();
+            PrintingText.PrintTitle();
+            ICharacter capraDemon = new Capra_Demon();
+            Characters.Add(capraDemon);
+            PrintingText.DisplayCharacterInfo(capraDemon);
+            ReadKey();
+            MainCharacterMenu();
+
+
+        }
+
+        public void UndeadParish()
+        {
+            PrintingText.Loading();
+            PrintingText.PrintTitle();
+            ICharacter hollowWarrior = new Hollow_Warrior();
+            Characters.Add(hollowWarrior);
+            PrintingText.DisplayCharacterInfo(hollowWarrior);
+            ReadKey();
+            MainCharacterMenu();
+        }
+
+        public void Blighttown()
+        {
+            PrintingText.Loading();
+            PrintingText.PrintTitle();
+            ICharacter undeadDog = new Undead_Attact_Dog();
+            Characters.Add(undeadDog);
+            PrintingText.DisplayCharacterInfo(undeadDog);
+            ReadKey();
+            MainCharacterMenu();
         }
 
         // Exit //
         public void ExitGame()
         {
-            WriteLine("Press Any Key to Exit");
+            PrintingText.Exit();
             ReadKey();
             PrintingText.Loading();
+            PrintingText.PrintYouDied();
+            ReadKey();
             Environment.Exit(0);
         }
     }
