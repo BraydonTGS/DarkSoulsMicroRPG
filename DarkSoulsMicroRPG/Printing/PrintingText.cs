@@ -62,6 +62,28 @@ namespace DarkSoulsMicroRPG.Printing
             ResetColor();
         }
 
+        // Display Character Health //
+
+        public static void DisplayHealth(ICharacter character)
+        {
+            ForegroundColor = character.Color;
+            WriteLine($"{character.Name}'s Health");
+            ResetColor();
+            Write("[");
+            BackgroundColor = character.Color;
+            for (int i = 0; i < character.Health; i++)
+            {
+                Write(" ");
+            }
+            BackgroundColor = ConsoleColor.Black;
+            for (int i = character.Health; i < character.MaxHealth; i++)
+            {
+                Write(" ");
+            }
+            WriteLine($"] ({character.Health}/{character.MaxHealth})");
+            ResetColor();
+        }
+
         // Printing a Custom Menu //
         public static int PrintCustomMenu(string prompt, string[] options)
         {
@@ -95,6 +117,13 @@ namespace DarkSoulsMicroRPG.Printing
             ForegroundColor = previousColor;
         }
 
+        // Pringint Undead Burg Text //
+        public static void UndeadBurg(ICharacter character)
+        {
+            string prompt = $"\n{character.Type}: {character.Name} finally arrives at the Undead Burg.\n\nYou hear a noise behind you and swiftly turn around\n\nonly to discover...";
+            PrintMePlease(prompt);
+        }
+
         // Dark Souls Intro Testing Print //
         public static void DsIntro()
         {
@@ -111,6 +140,7 @@ namespace DarkSoulsMicroRPG.Printing
             PrintMePlease(lore);
         }
 
+        // Exit the Game //
         public static void Exit()
         {
             string exit = "> Press Any Key To Exit...";

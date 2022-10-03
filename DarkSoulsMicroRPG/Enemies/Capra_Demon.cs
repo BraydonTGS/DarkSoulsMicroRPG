@@ -19,12 +19,25 @@ namespace DarkSoulsMicroRPG.Enemies
         public int MaxHealth { get; set; } = 20;
         public int Health { get; set; }
 
+        public bool IsDead { get => Health <= 0; }
+        public bool IsAlive { get => Health > 0; }
+
         public Capra_Demon()
         {
             Random randomId = new Random();
             CharacterId = randomId.Next(1, 1000);
 
             Health = MaxHealth;
+        }
+
+        public void Attack(ICharacter player)
+        {
+
+        }
+
+        public void TakeDamage(int damage)
+        {
+
         }
 
     }

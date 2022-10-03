@@ -19,6 +19,9 @@ namespace DarkSoulsMicroRPG.Characters
         public int MaxHealth { get; set; } = 20;
         public int Health { get; set; }
 
+        public bool IsDead { get => Health <= 0; }
+        public bool IsAlive { get => Health > 0; }
+
         public Thief(string name)
         {
             Random randomId = new Random();
@@ -26,6 +29,16 @@ namespace DarkSoulsMicroRPG.Characters
 
             Name = name;
             Health = MaxHealth;
+        }
+
+        public void Attack(ICharacter enemy)
+        {
+
+        }
+
+        public void TakeDamage(int damage)
+        {
+
         }
 
     }

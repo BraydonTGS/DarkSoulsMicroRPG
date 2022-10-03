@@ -19,12 +19,24 @@ namespace DarkSoulsMicroRPG.Enemies
         public int MaxHealth { get; set; } = 10;
         public int Health { get; set; }
 
+        public bool IsDead { get => Health <= 0; }
+        public bool IsAlive { get => Health > 0; }
+
         public Undead_Attact_Dog()
         {
             Random randomId = new Random();
             CharacterId = randomId.Next(1, 1000);
 
             Health = MaxHealth;
+        }
+
+        public void Attack(ICharacter player)
+        {
+
+        }
+
+        public void TakeDamage(int damage)
+        {
 
         }
     }

@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Drawing;
+using DarkSoulsMicroRPG.Characters;
 using DarkSoulsMicroRPG.Enemies;
 using DarkSoulsMicroRPG.Factory;
 using DarkSoulsMicroRPG.Interfaces;
@@ -10,6 +12,7 @@ namespace DarkSoulsMicroRPG.World
     {
         private List<ICharacter> Characters;
         public ICharacter MyCharacter;
+        public ICharacter CurrentEnemy;
 
         public World()
         {
@@ -125,8 +128,6 @@ In the morning you decide to...";
                 default:
                     break;
             }
-
-
         }
 
         public void UndeadBurg()
@@ -135,7 +136,10 @@ In the morning you decide to...";
             PrintingText.PrintTitle();
             ICharacter capraDemon = new Capra_Demon();
             Characters.Add(capraDemon);
+            CurrentEnemy = capraDemon;
+            PrintingText.UndeadBurg(MyCharacter);
             PrintingText.DisplayCharacterInfo(capraDemon);
+            Fight();
             ReadKey();
             MainCharacterMenu();
 
@@ -148,6 +152,7 @@ In the morning you decide to...";
             PrintingText.PrintTitle();
             ICharacter hollowWarrior = new Hollow_Warrior();
             Characters.Add(hollowWarrior);
+            CurrentEnemy = hollowWarrior;
             PrintingText.DisplayCharacterInfo(hollowWarrior);
             ReadKey();
             MainCharacterMenu();
@@ -159,9 +164,29 @@ In the morning you decide to...";
             PrintingText.PrintTitle();
             ICharacter undeadDog = new Undead_Attact_Dog();
             Characters.Add(undeadDog);
+            CurrentEnemy = undeadDog;
             PrintingText.DisplayCharacterInfo(undeadDog);
             ReadKey();
             MainCharacterMenu();
+        }
+
+        public void Fight()
+        {
+            string prompt = $"You are facing {CurrentEnemy.Name}. What Would You Like to do? ";
+            string[] options = { "Fight", "Run Away" };
+            var userDecision = PrintingText.PrintCustomMenu(prompt, options);
+
+            if (userDecision == 0)
+            {
+
+            }
+            else if (userDecision == 2)
+            {
+                WriteLine($"You try to excape, but you are no match for the {CurrentEnemy.Name}");
+                PrintingText.Loading();
+                PrintingText.PrintYouDied();
+            }
+
         }
 
         // Exit //
