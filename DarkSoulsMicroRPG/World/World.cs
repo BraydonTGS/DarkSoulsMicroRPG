@@ -19,12 +19,35 @@ namespace DarkSoulsMicroRPG.World
             PrintingText.Continue();
             PrintingText.Loading();
             PrintingText.PrintTitle();
-            PrintingText.Continue();
-            RunCharacterSelection();
+            NewGameMenu();
         }
 
         // To Add Main Menu - New Game - View Lore - Exit //
         // Create a Typing Animation Method //
+
+        public void NewGameMenu()
+        {
+            PrintingText.PrintTitle();
+            string prompt = "> Menu Selection";
+            string[] options = { "New Game", "Dark Souls Lore", "Exit" };
+            var menuIndex = PrintingText.PrintCustomMenu(prompt, options);
+            if (menuIndex == 0)
+            {
+                RunCharacterSelection();
+            }
+            else if (menuIndex == 1)
+            {
+                PrintingText.PrintTitle();
+                PrintingText.Lore();
+                PrintingText.Continue();
+                PrintingText.Loading();
+                NewGameMenu();
+            }
+            else
+            {
+                ExitGame();
+            }
+        }
 
         // Choose Your Character //
         private void RunCharacterSelection()
@@ -86,6 +109,7 @@ In the morning you decide to...";
         {
             WriteLine("Press Any Key to Exit");
             ReadKey();
+            PrintingText.Loading();
             Environment.Exit(0);
         }
     }
