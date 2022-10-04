@@ -19,6 +19,8 @@ namespace DarkSoulsMicroRPG.Characters
         public int MaxHealth { get; set; } = 20;
         public int Health { get; set; }
 
+        public int Souls { get; set; } = 1000;
+
         public Random FightPercent { get; set; }
         public bool IsDead { get => Health <= 0; }
         public bool IsAlive { get => Health > 0; }
@@ -35,7 +37,24 @@ namespace DarkSoulsMicroRPG.Characters
 
         public void Attack(ICharacter enemy)
         {
+            if (enemy is IFightable myEnemy)
+            {
+                ConsoleColor previousColor = ForegroundColor;
+                ForegroundColor = Color;
+                Write("You release two quick slashes back to back...");
+                int randHit = FightPercent.Next(1, 101);
+                if (randHit <= 80)
+                {
+                    WriteLine(" and it is a direct hit!!!");
+                    myEnemy.TakeDamage(3);
+                }
+                else
+                {
+                    WriteLine($" {enemy.Name} dodges the attack!");
 
+                }
+                ForegroundColor = previousColor;
+            }
         }
 
         public void TakeDamage(int damage)

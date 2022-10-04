@@ -16,7 +16,9 @@ namespace DarkSoulsMicroRPG.Enemies
         public string Name { get; set; } = "Undead Dog";
         public int Level { get; set; } = 1;
 
-        public int MaxHealth { get; set; } = 10;
+        public int Souls { get; set; } = 1000;
+
+        public int MaxHealth { get; set; } = 12;
         public int Health { get; set; }
 
         public Random FightPercent { get; set; }
@@ -34,7 +36,24 @@ namespace DarkSoulsMicroRPG.Enemies
 
         public void Attack(ICharacter player)
         {
+            if (player is IFightable myPlayer)
+            {
+                ConsoleColor previousColor = ForegroundColor;
+                ForegroundColor = Color;
+                Write($"The Undead Dog leaps forward and bits at {player.Name}...");
+                int randHit = FightPercent.Next(1, 101);
+                if (randHit <= 70)
+                {
+                    WriteLine(" and it is a direct hit!!!");
+                    myPlayer.TakeDamage(3);
+                }
+                else
+                {
+                    WriteLine($" {player.Name} dodges the attack!");
 
+                }
+                ForegroundColor = previousColor;
+            }
         }
 
         public void TakeDamage(int damage)

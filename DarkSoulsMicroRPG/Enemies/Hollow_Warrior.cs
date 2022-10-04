@@ -16,6 +16,8 @@ namespace DarkSoulsMicroRPG.Enemies
         public string Name { get; set; } = "Hollow Warrior";
         public int Level { get; set; } = 5;
 
+        public int Souls { get; set; } = 1000;
+
         public int MaxHealth { get; set; } = 15;
         public int Health { get; set; }
 
@@ -34,7 +36,24 @@ namespace DarkSoulsMicroRPG.Enemies
 
         public void Attack(ICharacter player)
         {
+            if (player is IFightable myPlayer)
+            {
+                ConsoleColor previousColor = ForegroundColor;
+                ForegroundColor = Color;
+                Write($"The Hollow Warrior charges forward and slashes at {player.Name}...");
+                int randHit = FightPercent.Next(1, 101);
+                if (randHit <= 90)
+                {
+                    WriteLine(" and it is a direct hit!!!");
+                    myPlayer.TakeDamage(2);
+                }
+                else
+                {
+                    WriteLine($" {player.Name} dodges the attack!");
 
+                }
+                ForegroundColor = previousColor;
+            }
         }
 
         public void TakeDamage(int damage)

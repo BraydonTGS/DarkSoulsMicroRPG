@@ -49,6 +49,27 @@ namespace DarkSoulsMicroRPG.Printing
             ForegroundColor = previousColor;
         }
 
+        public static void PrintYouWon()
+        {
+            Clear();
+            ConsoleColor previousColor = ForegroundColor;
+            ForegroundColor = ConsoleColor.Red;
+
+            WriteLine(@"▓██   ██▓ ▒█████   █    ██     █     █░ ▒█████   ███▄    █    
+ ▒██  ██▒▒██▒  ██▒ ██  ▓██▒   ▓█░ █ ░█░▒██▒  ██▒ ██ ▀█   █    
+  ▒██ ██░▒██░  ██▒▓██  ▒██░   ▒█░ █ ░█ ▒██░  ██▒▓██  ▀█ ██▒   
+  ░ ▐██▓░▒██   ██░▓▓█  ░██░   ░█░ █ ░█ ▒██   ██░▓██▒  ▐▌██▒   
+  ░ ██▒▓░░ ████▓▒░▒▒█████▓    ░░██▒██▓ ░ ████▓▒░▒██░   ▓██░   
+   ██▒▒▒ ░ ▒░▒░▒░ ░▒▓▒ ▒ ▒    ░ ▓░▒ ▒  ░ ▒░▒░▒░ ░ ▒░   ▒ ▒    
+ ▓██ ░▒░   ░ ▒ ▒░ ░░▒░ ░ ░      ▒ ░ ░    ░ ▒ ▒░ ░ ░░   ░ ▒░   
+ ▒ ▒ ░░  ░ ░ ░ ▒   ░░░ ░ ░      ░   ░  ░ ░ ░ ▒     ░   ░ ░    
+ ░ ░         ░ ░     ░            ░        ░ ░           ░    
+ ░ ░                                                          ");
+
+            ForegroundColor = previousColor;
+        }
+
+
         // Display Character Info //
         public static void DisplayCharacterInfo(ICharacter character)
         {
@@ -111,7 +132,7 @@ namespace DarkSoulsMicroRPG.Printing
             Write("\n> Loading Please Wait");
             for (int i = 0; i < 4; i++)
             {
-                Thread.Sleep(750);
+                Thread.Sleep(650);
                 Write(".");
             }
             ForegroundColor = previousColor;
@@ -121,6 +142,20 @@ namespace DarkSoulsMicroRPG.Printing
         public static void UndeadBurg(ICharacter character)
         {
             string prompt = $"\n{character.Name} finally arrives at the Undead Burg.\n\nYou hear a noise behind you and swiftly turn around\n\nonly to discover...";
+            PrintMePlease(prompt);
+        }
+
+        // Pringint Undead Burg Text //
+        public static void UndeadParish(ICharacter character)
+        {
+            string prompt = $"\n{character.Name} finally arrives at the Undead Parish.\n\nYou make your way across the broken scaffolding\n\nonly to discover...";
+            PrintMePlease(prompt);
+        }
+
+        // Pringint Undead Burg Text //
+        public static void Blighttown(ICharacter character)
+        {
+            string prompt = $"\n{character.Name} finally arrives in Blighttown.\n\nDragging your feet through the poisonous swamp when you stumble upon...";
             PrintMePlease(prompt);
         }
 
@@ -156,7 +191,7 @@ namespace DarkSoulsMicroRPG.Printing
             for (int i = 0; i < input.Length; i++)
             {
                 Write(input[i]);
-                Thread.Sleep(75);
+                Thread.Sleep(65);
 
                 // Skip to the End of the String //
                 if (KeyAvailable)

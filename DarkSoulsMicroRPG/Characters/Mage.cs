@@ -19,6 +19,8 @@ namespace DarkSoulsMicroRPG.Characters
         public int MaxHealth { get; set; } = 15;
         public int Health { get; set; }
 
+        public int Souls { get; set; } = 1000;
+
         public Random FightPercent { get; set; }
         public bool IsDead { get => Health <= 0; }
         public bool IsAlive { get => Health > 0; }
@@ -42,10 +44,10 @@ namespace DarkSoulsMicroRPG.Characters
                 ForegroundColor = Color;
                 Write("You summon your power and cast a glinstone arrow...");
                 int randHit = FightPercent.Next(1, 101);
-                if (randHit <= 60)
+                if (randHit <= 50)
                 {
                     WriteLine(" and it is a direct hit!!!");
-                    myEnemy.TakeDamage(60);
+                    myEnemy.TakeDamage(5);
                 }
                 else
                 {
@@ -54,12 +56,6 @@ namespace DarkSoulsMicroRPG.Characters
                 }
                 ForegroundColor = previousColor;
             }
-
-        }
-
-        public void Fight(ICharacter enemy)
-        {
-
 
         }
 

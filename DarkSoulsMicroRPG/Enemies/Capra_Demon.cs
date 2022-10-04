@@ -16,7 +16,9 @@ namespace DarkSoulsMicroRPG.Enemies
         public string Name { get; set; } = "Capra Demon";
         public int Level { get; set; } = 10;
 
-        public int MaxHealth { get; set; } = 20;
+        public int Souls { get; set; } = 1000;
+
+        public int MaxHealth { get; set; } = 25;
         public int Health { get; set; }
 
         public Random FightPercent { get; set; }
@@ -40,7 +42,7 @@ namespace DarkSoulsMicroRPG.Enemies
                 ForegroundColor = Color;
                 Write($"Capra Demon lunges forward and strikes at {player.Name}...");
                 int randHit = FightPercent.Next(1, 101);
-                if (randHit <= 30)
+                if (randHit <= 25)
                 {
                     WriteLine(" and it is a direct hit!!!");
                     myPlayer.TakeDamage(5);

@@ -110,7 +110,7 @@ namespace DarkSoulsMicroRPG.World
             string prompt = @"After arrving to Firelink shrine you decide to spend the night...
 
 In the morning you...";
-            string[] options = { " Travel to the Undead Burg", "Travel to the Undead Parish", "Travel to Blighttown", "Rest At Bonfire", "Display Status", "Give Up" };
+            string[] options = { " Travel to the Undead Burg", "Travel to the Undead Parish", "Travel to Blighttown", "Ring Bell of Awakening", "Rest At Bonfire", "Display Status", "Give Up" };
             var userDecision = PrintingText.PrintCustomMenu(prompt, options);
             switch (userDecision)
             {
@@ -124,12 +124,15 @@ In the morning you...";
                     Blighttown();
                     break;
                 case 3:
-                    RestAtBonfire();
+                    RingBellOfAwakening();
                     break;
                 case 4:
-                    DisplayStatus();
+                    RestAtBonfire();
                     break;
                 case 5:
+                    DisplayStatus();
+                    break;
+                case 6:
                     ExitGame();
                     break;
                 default:
@@ -156,7 +159,8 @@ In the morning you...";
             Enemies.Add(capraDemon);
             CurrentEnemy = capraDemon;
             PrintingText.UndeadBurg(MyCharacter);
-            ReadKey();
+            PrintingText.Continue();
+            PrintingText.PrintTitle();
             PrintingText.DisplayCharacterInfo(capraDemon);
             ReadKey();
             FightPrompt();
@@ -180,8 +184,9 @@ In the morning you...";
             ICharacter hollowWarrior = new Hollow_Warrior();
             Enemies.Add(hollowWarrior);
             CurrentEnemy = hollowWarrior;
-            PrintingText.UndeadBurg(MyCharacter);
-            ReadKey();
+            PrintingText.UndeadParish(MyCharacter);
+            PrintingText.Continue();
+            PrintingText.PrintTitle();
             PrintingText.DisplayCharacterInfo(hollowWarrior);
             ReadKey();
             FightPrompt();
@@ -196,7 +201,7 @@ In the morning you...";
             {
                 if (enemy.IsDead)
                 {
-                    string prompt = $"\nYou have already defeated {CurrentEnemy.Name}";
+                    string prompt = $"\nYou have already defeated the {CurrentEnemy.Name}";
                     PrintingText.PrintMePlease(prompt);
                     PrintingText.Continue();
                     MainCharacterMenu();
@@ -205,8 +210,9 @@ In the morning you...";
             ICharacter undeadDog = new Undead_Attact_Dog();
             Enemies.Add(undeadDog);
             CurrentEnemy = undeadDog;
-            PrintingText.UndeadBurg(MyCharacter);
-            ReadKey();
+            PrintingText.Blighttown(MyCharacter);
+            PrintingText.Continue();
+            PrintingText.PrintTitle();
             PrintingText.DisplayCharacterInfo(undeadDog);
             ReadKey();
             FightPrompt();
@@ -214,15 +220,59 @@ In the morning you...";
 
         public void RestAtBonfire()
         {
-            // Maybe I can add logic for how many times you can rest // 
+            if (MyCharacter.Souls == 0)
+            {
+                PrintingText.Loading();
+                PrintingText.PrintTitle();
+                string prompt1 = $"\nThe fire was extinguished... you can no longer rest here...\n";
+                PrintingText.PrintMePlease(prompt1);
+                PrintingText.DisplayCharacterInfo(MyCharacter);
+                PrintingText.Continue();
+
+            }
+            else
+            {
+                PrintingText.Loading();
+                PrintingText.PrintTitle();
+                string prompt = $"\nYou rest at the Bonfire replenshing your estus...\n";
+                PrintingText.PrintMePlease(prompt);
+                MyCharacter.Health = MyCharacter.MaxHealth;
+                PrintingText.DisplayCharacterInfo(MyCharacter);
+                PrintingText.Continue();
+
+            }
+            MyCharacter.Souls -= 500;
+            MainCharacterMenu();
+        }
+
+        public void RingBellOfAwakening()
+        {
+            int DeadCounter = 0;
+            foreach (var boss in Enemies)
+            {
+                if (boss is IFightable miniBoss)
+                {
+                    if (miniBoss.IsDead)
+                    {
+                        DeadCounter++;
+                    }
+                }
+            }
+            while (DeadCounter < 3)
+            {
+                PrintingText.Loading();
+                PrintingText.PrintTitle();
+                string prompt = $"\n You must defeat 3 enemies before you can ring the bell...";
+                PrintingText.PrintMePlease(prompt);
+                PrintingText.Continue();
+                MainCharacterMenu();
+
+            }
             PrintingText.Loading();
             PrintingText.PrintTitle();
-            string prompt = $"\nYou rest at the Bonfire replenshing your estus...\n";
-            PrintingText.PrintMePlease(prompt);
-            MyCharacter.Health = MyCharacter.MaxHealth;
-            PrintingText.DisplayCharacterInfo(MyCharacter);
-            PrintingText.Continue();
-            MainCharacterMenu();
+            PrintingText.PrintYouWon();
+            StartANewGame();
+            ReadKey();
         }
 
         public void FightPrompt()
