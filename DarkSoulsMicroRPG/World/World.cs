@@ -24,16 +24,16 @@ namespace DarkSoulsMicroRPG.World
         public void Run()
         {
             Title = "Dark Souls RPG";
-            //PrintingText.DsIntro();
-            //PrintingText.Continue();
-            //PrintingText.Loading();
-            //PrintingText.PrintTitle();
+
+            PrintingText.DsIntro();
+            PrintingText.Continue();
+            PrintingText.Loading();
+            PrintingText.PrintTitle();
             NewGameMenu();
         }
 
         // To Add Main Menu - New Game - View Lore - Exit //
         // Create a Typing Animation Method //
-
         public void NewGameMenu()
         {
             PrintingText.PrintTitle();
@@ -61,7 +61,6 @@ namespace DarkSoulsMicroRPG.World
         // Choose Your Character //
         private void RunCharacterSelection()
         {
-
             // Character Selection Menu //
             string prompt = "> Please Select Your Class: ";
             string[] options = { "Warrior", "Mage", "Thief" };
@@ -162,6 +161,7 @@ In the morning you...";
             PrintingText.Continue();
             PrintingText.PrintTitle();
             PrintingText.DisplayCharacterInfo(capraDemon);
+            PrintingText.Continue();
             ReadKey();
             FightPrompt();
         }
@@ -188,7 +188,7 @@ In the morning you...";
             PrintingText.Continue();
             PrintingText.PrintTitle();
             PrintingText.DisplayCharacterInfo(hollowWarrior);
-            ReadKey();
+            PrintingText.Continue();
             FightPrompt();
         }
 
@@ -214,7 +214,7 @@ In the morning you...";
             PrintingText.Continue();
             PrintingText.PrintTitle();
             PrintingText.DisplayCharacterInfo(undeadDog);
-            ReadKey();
+            PrintingText.Continue();
             FightPrompt();
         }
 
@@ -271,6 +271,7 @@ In the morning you...";
             PrintingText.Loading();
             PrintingText.PrintTitle();
             PrintingText.PrintYouWon();
+            PrintingText.Continue();
             StartANewGame();
             ReadKey();
         }
@@ -392,7 +393,8 @@ In the morning you...";
 
             if (selectedIndex == 0)
             {
-                Run();
+                World newWorld = new World();
+                newWorld.Run();
             }
             else if (selectedIndex == 1)
             {

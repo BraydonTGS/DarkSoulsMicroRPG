@@ -162,6 +162,7 @@ namespace DarkSoulsMicroRPG.Printing
         // Dark Souls Intro Testing Print //
         public static void DsIntro()
         {
+            Clear();
             string intro = "Thou who art Undead, art chosen...\n\nIn thine exodus from the Undead Asylum,\n\nmaketh pilgrimage to the land of Ancient Lords...\n\nWhen thou ringeth the Bell of Awakening,\n\nthe fate of the Undead thou shalt know.";
             PrintMePlease(intro);
         }
