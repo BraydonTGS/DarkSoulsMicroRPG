@@ -162,7 +162,6 @@ In the morning you...";
             PrintingText.PrintTitle();
             PrintingText.DisplayCharacterInfo(capraDemon);
             PrintingText.Continue();
-            ReadKey();
             FightPrompt();
         }
 
