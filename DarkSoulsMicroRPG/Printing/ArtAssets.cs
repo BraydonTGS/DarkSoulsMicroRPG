@@ -206,7 +206,7 @@ namespace DarkSoulsMicroRPG.Printing
         public static string Skulls = "";
 
 
-        public static string Credits = "https://www.youtube.com/user/mikewesthad https://asciiart.website/index.php";
+        public static string Credits = "Youtube(Mike Westhad is awesome!!!) https://www.youtube.com/user/mikewesthad Art: https://asciiart.website/index.php";
 
     }
 
